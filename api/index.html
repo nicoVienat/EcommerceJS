@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+    <!-- DEPENDANCES -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+    <!-- APPLICATION -->
+    <script src="app.js"></script>
+    <script src="app.config.js"></script>
+
+    <!-- CONTROLLERS -->
+    <script src="controllers/HomeController.js"></script>
+    <script src="controllers/ArticleController.js"></script>
+    <script src="controllers/CartController.js"></script>
+
+    <!-- DIRECTIVES -->
+    <script src="public/js/header.js"></script>
+    <script src="public/js/footer.js"></script>
+
+    <!-- SERVICES -->
+    <script src="public/js/routingService.js"></script>
+    <script src="public/js/localStorageService.js"></script>
+
+    <!--TEMPLATES-->
+    <script src="public/js/jquery.js"></script>
+    <script src="public/js/bootstrap.js"></script>
+
+    <!-- STYLESHEET -->
+    <link href="public/css/bootstrap.css" rel="stylesheet">
+    <link href="public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="public/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div ng-app="kinderApp">
+        <div ng-view>
+        </div>
+    </div>
+</body>
+</html>

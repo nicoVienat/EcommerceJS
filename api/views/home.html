@@ -1,0 +1,26 @@
+<header-top></header-top>
+<div class="container main-container">
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-sm-12">
+            <span class="title">KINDER PRODUCTS</span>
+        </div>
+        <div ng-repeat="item in itemsToDisplay track by $index" class="col-lg-4 col-sm-4 hero-feature text-center">
+            <div class="thumbnail">
+                <a ng-click="goTo(item.kinderId)" class="link-p">
+                    <img ng-src="{{item.imageURL}}" alt="">
+                </a>
+                <div class="caption prod-caption">
+                    <h4 ng-click="goTo(item.kinderId)">{{item.name}}</h4>
+                    <p>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-default">{{item.price}}€</a>
+                            <a ng-click="goTo(item.kinderId)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Voir</a>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer-bottom></footer-bottom>
