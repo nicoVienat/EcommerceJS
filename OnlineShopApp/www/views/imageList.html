@@ -1,0 +1,33 @@
+<ion-view>
+    <ion-nav-bar class="bar-royal"><ion-nav-title>Liste des images</ion-nav-title></ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="list card" ng-repeat="post in posts">
+
+            <div class="item item-avatar">
+                <img src="{{post.user.profilePictureURL}}">
+                <h2>{{post.user.displayName}}</h2>
+                <p>{{post.createdAt | date: 'LLLL d, yyyy'}}</p>
+                <button ng-click="likeOrUnlikePost(post)"
+                        ng-class="{'ion-ios-heart': post.likedByCurrentUser, 'ion-ios-heart-outline': !post.likedByCurrentUser}"
+                        class="button button-icon ion-ios-heart"
+                        ng-disabled="likeDisabled"></button>
+
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" src="{{post.imageURL}}">
+                <p>
+                    {{post.message}}
+                </p>
+                <p>
+                    <a href="#/tab/likes/{{post.id}}" class="subdued">{{post.likesCount}} Likes</a>
+                    <a href="#/tab/comments/{{post.id}}" class="subdued">{{post.commentsCount}} Comments</a>
+                </p>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

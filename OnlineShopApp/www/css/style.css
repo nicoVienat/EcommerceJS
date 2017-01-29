@@ -1,0 +1,18 @@
+/* Empty. Add your own CSS if you like */
+.item-avatar > .ion-ios-heart, .ion-ios-heart-outline {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 40px;
+}
+
+.item-avatar > .ion-ios-heart {
+    color: red;
+}
+
+.item-avatar > .ion-ios-trash {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    font-size: 25px;
+}

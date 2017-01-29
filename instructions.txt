@@ -1,0 +1,14 @@
+- Dans le dossier OnlineShopJS tapez la commande : 
+	npm install 
+- Lancer l'executable mongod.exe
+- Toujours dans le dossier OnlineShopJS lancer le server : 
+	node app.js
+
+- Tapez l'URL : http://localhost/DEVWEB/OnlineShopJS/OnlineShopWeb
+
+Si nécessaire pour la partie ionic : 
+- npm install -g ionic cordova
+
+Pour tester la partie ionic :
+- Ce déplacer dans le dossier OnlineShopApp
+- lancer : ionic serve -l
