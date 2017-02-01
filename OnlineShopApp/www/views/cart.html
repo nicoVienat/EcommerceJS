@@ -1,0 +1,22 @@
+<ion-view>
+    <ion-nav-bar class="bar-assertive"><ion-nav-title>Panier</ion-nav-title></ion-nav-bar>
+    <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="doRefresh()">
+        </ion-refresher>
+
+        <div class="list">
+
+            <div class="item item-button-right" ng-repeat="article in cart track by $index">
+                <a class="item item-avatar" href="#/tab/article/{{article.kinderId}}">
+                    <img ng-src="{{article.imageURL}}">
+                    <h2>{{article.name}}</h2>
+                    <p>{{article.price}} euros</p>
+                </a>
+                <button id="trash" ng-click="deleteItem(article.kinderId)" class="button button-assertive">
+                    <i class="icon ion-ios-trash"></i>
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

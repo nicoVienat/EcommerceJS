@@ -1,18 +1,26 @@
 /* Empty. Add your own CSS if you like */
-.item-avatar > .ion-ios-heart, .ion-ios-heart-outline {
+
+.item-divider > .button-assertive {
     position: absolute;
-    top: 12px;
+    top: 6px;
     right: 12px;
-    font-size: 40px;
 }
 
-.item-avatar > .ion-ios-heart {
-    color: red;
+.card .item:last-child, .list-inset .item:last-child {
+    padding-top: 50px;
 }
 
-.item-avatar > .ion-ios-trash {
+.item-divider {
+  text-color: red;
+}
+
+.item h2 {
+    font-weight: bolder;
+    color: #e42112;
+}
+
+#trash {
     position: absolute;
-    top: 12px;
-    right: 5px;
-    font-size: 25px;
+    top: 35px;
+    right: 15px;
 }

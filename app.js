@@ -25,6 +25,7 @@ router.get('/kinders', function (req, res) {
 });
 
 router.get('/kinders/:kinder_id', function (req, res) {
+    console.log('test');
     Kinder.find({ kinderId: req.params.kinder_id }).then(function (kinder) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
