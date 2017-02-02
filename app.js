@@ -5,13 +5,14 @@ var Kinder = require('./model/kinderModel');
 var paiement       = require('./middlewares/paiement.js');
 
 var app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var router = express.Router();
 
 router.get('/', function(req, res) {
-    res.json({ message: 'Test API' });
+
 });
 
 router.get('/kinders', function (req, res) {
@@ -25,7 +26,6 @@ router.get('/kinders', function (req, res) {
 });
 
 router.get('/kinders/:kinder_id', function (req, res) {
-    console.log('test');
     Kinder.find({ kinderId: req.params.kinder_id }).then(function (kinder) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -36,7 +36,6 @@ router.get('/kinders/:kinder_id', function (req, res) {
 });
 
 router.post('/paiement', paiement, function (req, res) {
-    console.log(req.message);
     res.json({
         message: req.message,
         valid: req.valid

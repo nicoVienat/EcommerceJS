@@ -4,12 +4,13 @@ angular.module('kinderApp')
 .controller('CartController', ['$scope', '$rootScope', 'localStorage', '$http', function ($scope, $rootScope, localStorage, $http) {
     var cart = 'cart';
     $scope.cart = localStorage.get(cart);
-    $scope.form = {};
-    $scope.form.titulary = "Nico";
-    $scope.form.number = 8522435151611278;
-    $scope.form.expiryMonth = "01";
-    $scope.form.expiryYear = "2013";
-    $scope.form.cryptogram = '946';
+    $scope.validOrder = -1;
+    $scope.paiement = {};
+    $scope.paiement.titulary = "Nico";
+    $scope.paiement.number = 8522435151611278;
+    $scope.paiement.expiryMonth = "01";
+    $scope.paiement.expiryYear = "2013";
+    $scope.paiement.cryptogram = '946';
 
     $scope.priceOfItems = localStorage.getPriceTotal();
 
@@ -35,21 +36,20 @@ angular.module('kinderApp')
 
 
     $scope.pay = function () {
-        var cartPaiement = {
-            paiement: $scope.form,
-            cart: $scope.cart
-        };
-
-        $http.post($rootScope.apiURL + '/paiement', cartPaiement).then(function (res) {
-            $scope.validOrder = res.data.valid;
+        $http.post($rootScope.apiURL + '/paiement', $scope.paiement).then(function (res) {
+            console.log(res);
+            console.log(res.data.valid);
             if (res.data.valid) {
-                $('.alert-success').show();
+                localStorage.newCart();
+                $scope.validOrder = 1;
             }
-            else {
+             else {
+                $scope.validOrder = 0;
                 $scope.checkoutErrorMessage = res.data.message;
-                $('.alert-danger').show();
             }
         }, function (err) {
+            $scope.validOrder = 0;
+            $scope.checkoutErrorMessage = err;
             console.log('Erreur : ' + err);
         });
     };

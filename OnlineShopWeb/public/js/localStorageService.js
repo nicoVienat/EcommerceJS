@@ -11,6 +11,11 @@ angular.module('kinderApp')
         }
     };
 
+    //this.newCart = function () {
+    //    var localstorage = [];
+    //    localStorage.setItem('cart', JSON.stringify(localstorage));
+    //};
+
     this.get = function () {
         return JSON.parse(localStorage.getItem('cart'));
     };

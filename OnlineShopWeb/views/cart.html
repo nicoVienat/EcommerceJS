@@ -61,26 +61,26 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div ng-if="numberOfItems > 0">
                     <span class="title">Information Paiement</span>
-                <form ng-submit="pay()" class="form-horizontal" role="form">
+                <form ng-submit="pay()" class="form-horizontal">
                     <fieldset>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="titulary">Nom de la carte</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="titulary" ng-model="form.titulary" required>
+                                <input type="text" class="form-control" name="titulary" ng-model="paiement.titulary" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="number">Numéro</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="number" ng-model="form.number" required>
+                                <input type="number" class="form-control" name="number" ng-model="paiement.number" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="expiryMonth">Expiration Date</label>
+                            <label class="col-sm-3 control-label" for="expiryMonth">Date d'expiration</label>
                             <div class="col-sm-9">
                                 <div class="row">
-                                    <div class="col-xs-3">
-                                        <select class="form-control col-sm-3" name="expiry-month" id="expiryMonth" ng-model="form.expiryMonth" required>
+                                    <div class="col-xs-4">
+                                        <select class="form-control col-sm-3" name="expiryMonth" id="expiryMonth" ng-model="paiement.expiryMonth" required>
                                             <option>Mois</option>
                                             <option value="01" selected>Jan (01)</option>
                                             <option value="02">Feb (02)</option>
@@ -97,7 +97,7 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-3">
-                                        <select class="form-control" name="expiryYear" ng-model="expiryYear" required>
+                                        <select class="form-control" name="expiryYear" ng-model="paiement.expiryYear" required>
                                             <option>Year</option>
                                             <option value="2013" selected>2013</option>
                                             <option value="2014">2014</option>
@@ -118,21 +118,21 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="cryptogram">Card CVV</label>
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" ng-model="form.cryptogram" name="cvv" id="cvv" placeholder="Security Code" required>
+                                <input type="text" class="form-control" ng-model="paiement.cryptogram" name="cvv" id="cvv" placeholder="Security Code" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
-                                <button type="button" class="btn btn-success">Payer</button>
+                                <button type="submit" class="btn btn-primary">Payer</button>
                             </div>
                         </div>
                     </fieldset>
                 </form>
             </div>
-            <div ng-if="validOrder" id="alert" class="alert alert-success" >
+            <div ng-if="validOrder == 1" id="alert" class="alert alert-success" >
                 <strong>Commande validée ! </strong>  Vous avez payé.
             </div>
-            <div ng-if="(!validOrder) && (numberOfItems > 0)" id="alert" class="alert alert-danger">
+            <div ng-if="validOrder == 0" id="alert" class="alert alert-danger">
                 <strong>Commande échouée !</strong> {{checkoutErrorMessage}} .
             </div>
         </div>
