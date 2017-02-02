@@ -5,6 +5,7 @@
 	node app.js
 
 - Tapez l'URL : http://localhost/OnlineShopJS/OnlineShopWeb
+(pensez au module CORS pour la partie paiement)
 
 Si nécessaire pour la partie ionic : 
 - npm install -g ionic cordova

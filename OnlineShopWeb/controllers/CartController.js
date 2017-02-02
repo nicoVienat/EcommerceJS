@@ -18,11 +18,13 @@ angular.module('kinderApp')
         localStorage.remove(reference);
         $scope.cart = localStorage.get(cart);
         $scope.numberOfItems = localStorage.getNumberOfItems();
+        $scope.priceOfItems = localStorage.getPriceTotal();
     };
 
     $scope.refreshCart = function (reference, qty) {
         localStorage.refresh(reference, qty);
         $scope.numberOfItems = localStorage.getNumberOfItems();
+        $scope.priceOfItems = localStorage.getPriceTotal();
     };
 
     $scope.set = function (item, qty) {
@@ -40,7 +42,7 @@ angular.module('kinderApp')
             console.log(res);
             console.log(res.data.valid);
             if (res.data.valid) {
-                localStorage.newCart();
+                localStorage.newCart();           
                 $scope.validOrder = 1;
             }
              else {
