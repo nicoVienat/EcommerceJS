@@ -14,6 +14,7 @@
                                 <td>Nom de l'Article</td>
                                 <td>Quantité</td>
                                 <td>Prix</td>
+                                <td>Ajout</td>
                                 <td>Supprimer</td>
                             </tr>
                         </thead>
@@ -26,9 +27,16 @@
                                     {{article.name}}
                                 </td>
                                 <td class="text-center">
-                                    <input type="text" name="" value="1" id="qty" ng-model="article.qty" class="input-qty form-control text-center" />
+                                    <p>
+                                        {{article.qty}}
+                                       
+                                    </p>
                                 </td>
                                 <td class="price text-center">{{article.price}} euros</td>
+                                <td class="text-center">
+                                    <button ng-click="set(article, 1)" class="btn btn-primary">+1
+                                        </button>
+                                </td>
                                 <td class="text-center">
                                     <a ng-click="deleteItem(article.kinderId)" class="remove_cart">
                                         <i class="fa fa-trash-o"></i>
@@ -36,17 +44,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" align="right">Total</td>
+                                <td colspan="5" align="right">Total</td>
                                 <td class="total">
-                                    <b>$ 163.47</b>
+                                    <b ng-if="priceOfItems!=0" >{{priceOfItems}} euros</b>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="btn-group btns-cart">
-                    <button type="button" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Continuer le Shopping</button>
-                    <button ng-click="refreshCart(article.reference, article.qty)" type="button" class="btn btn-primary"> Mettre à jour</button>
+                    <button ng-click="goTo('home')" type="button" class="btn btn-primary"><i class="fa fa-arrow-circle-left"></i> Continuer le Shopping</button>
                 </div>
             </div>
         </div>
@@ -125,7 +132,7 @@
             <div ng-if="validOrder" id="alert" class="alert alert-success" >
                 <strong>Commande validée ! </strong>  Vous avez payé.
             </div>
-            <div ng-if="!validOrder" id="alert" class="alert alert-danger">
+            <div ng-if="(!validOrder) && (numberOfItems > 0)" id="alert" class="alert alert-danger">
                 <strong>Commande échouée !</strong> {{checkoutErrorMessage}} .
             </div>
         </div>

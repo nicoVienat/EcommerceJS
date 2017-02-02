@@ -39,7 +39,6 @@ angular.module('kinderApp')
             currentCart.push(itemToAdd);
         }
         localStorage.setItem('cart', JSON.stringify(currentCart));
-        console.log('--- set LocalStorage Done ---');
         defer.resolve();
         return defer.promise;
     };
@@ -51,6 +50,15 @@ angular.module('kinderApp')
             numberOfItems += item.qty;
         });
         return numberOfItems;
+    };
+
+    this.getPriceTotal = function () {
+        var items = JSON.parse(localStorage.getItem('cart'));
+        var priceTotal = 0;
+        items.forEach(function (item) {
+            priceTotal += (item.price * item.qty);
+        });
+        return priceTotal;
     };
 
     this.remove = function (kinderId) {
@@ -65,7 +73,6 @@ angular.module('kinderApp')
                 }
             }
         }
-        console.log('--- Remove LocalStorage Done ---');
         defer.resolve();
         return defer.promise;
     };
@@ -82,7 +89,6 @@ angular.module('kinderApp')
                 }
             }
         }
-        console.log('--- Refresh LocalStorage Done ---');
         defer.resolve();
         return defer.promise;
     };

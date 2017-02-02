@@ -215,7 +215,7 @@ header .logo a{
 	font-family: 'open_sanscondensed_light';
 }
 header .logo a span{
-	color: #428bca;
+	color: #e42112;
 }
 header .logo a:hover{
 	text-decoration: none;
@@ -264,7 +264,7 @@ ul.cart-content b{
 	display: block;
 	font-family: 'DroidSansRegular';
 	/*font-size: 16px;*/
-	color: #428BCA;
+	color: #e42112;
 }
 .link-p{
 	display: block;
@@ -334,9 +334,9 @@ footer .copyright{
     width: 100%;
 }
 .navbar{
-	background: #384248;
+	background: #e42112;
 	margin-bottom: 0;
-	border-color: #384248;
+	border-color: #e42112;
 }
 @media (min-width: 768px) {
 	.navbar-nav > li > a {
@@ -356,7 +356,7 @@ footer .copyright{
 	transition: all 100ms ease-in-out 0s ;
 }
 .navbar li a:hover, .navbar li a.active{
-	background-color: #428bca!important;
+	background-color: #e42112;
 }
 .navbar li.nav-dropdown .caret{
 	border-top-color: #fff;

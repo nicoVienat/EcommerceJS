@@ -12,6 +12,14 @@ angular.module('kinderApp')
             $scope.goTo = function (reference) {
                 routing.changeURL(reference);
             }
+            $scope.priceOfItems = localStorage.getPriceTotal();
+
+            $scope.refreshCart = function (reference, qty) {
+                localStorage.refresh(reference, qty);
+                $scope.numberOfItems = localStorage.getNumberOfItems();
+            };
         }]
+
+
     };
 }]);

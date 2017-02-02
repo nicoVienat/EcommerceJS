@@ -4,7 +4,7 @@
 - Toujours dans le dossier OnlineShopJS lancer le server : 
 	node app.js
 
-- Tapez l'URL : http://localhost/DEVWEB/OnlineShopJS/OnlineShopWeb
+- Tapez l'URL : http://localhost/OnlineShopJS/OnlineShopWeb
 
 Si nécessaire pour la partie ionic : 
 - npm install -g ionic cordova
