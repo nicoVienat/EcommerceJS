@@ -2,7 +2,7 @@
     <ion-nav-bar class="bar-assertive"><ion-nav-title>Panier</ion-nav-title></ion-nav-bar>
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..."
-                       on-refresh="doRefresh()">
+                       on-refresh="refreshCart(article.reference, article.qty)">
         </ion-refresher>
 
         <div class="list">
@@ -17,6 +17,32 @@
                     <i class="icon ion-ios-trash"></i>
                 </button>
             </div>
+            
         </div>
+        <div class="list">
+  <label class="item item-input item-floating-label">
+   <span class="input-label">Name</span>
+    <input type="text" placeholder="Name">
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">CardNumber</span>
+    <input type="text" placeholder="CardNumber" >
+  </label>  
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Card Expiration</span>
+    <input type="text" class="date" placeholder="MM" maxlength="2">
+  </label> 
+<label class="item item-input item-floating-label">
+    <span class="input-label">Card Expiration</span>
+    <input type="text" class="date" placeholder="YY" maxlength="2">
+  </label> 
+    <label class="item item-input item-floating-label">
+    <span class="input-label">CVV</span>
+    <input type="text" maxlength="3" placeholder="CVV" >
+  </label> 
+ <div class="padding">
+    <button class="button button-block button-positive">Payment</div>
+  </div>  
+</div>
     </ion-content>
 </ion-view>

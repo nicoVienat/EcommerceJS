@@ -356,7 +356,7 @@ footer .copyright{
 	transition: all 100ms ease-in-out 0s ;
 }
 .navbar li a:hover, .navbar li a.active{
-	background-color: #e42112;
+	background-color: #ff3222;
 }
 .navbar li.nav-dropdown .caret{
 	border-top-color: #fff;
