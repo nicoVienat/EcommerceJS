@@ -2,47 +2,68 @@
     <ion-nav-bar class="bar-assertive"><ion-nav-title>Panier</ion-nav-title></ion-nav-bar>
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..."
-                       on-refresh="refreshCart(article.reference, article.qty)">
+                       on-refresh="doRefresh()">
         </ion-refresher>
 
+        <div ng-if="validOrder == 1" id="alert">
+            <div class="bar bar-header bar-balanced">
+                <h1 class="title"><strong>Commande validee ! </strong></h1>
+            </div>
+        </div>
+        <div ng-if="validOrder == 0" id="alert">
+            <div class="bar bar-header bar-dark">
+                <h1 class="title"><strong>Commande echouee !</strong> {{checkoutErrorMessage}} </h1>
+            </div>
+        </div>
         <div class="list">
-
             <div class="item item-button-right" ng-repeat="article in cart track by $index">
                 <a class="item item-avatar" href="#/tab/article/{{article.kinderId}}">
                     <img ng-src="{{article.imageURL}}">
                     <h2>{{article.name}}</h2>
                     <p>{{article.price}} euros</p>
+                    <p class="qtyItem">x {{article.qty}}</p>
                 </a>
                 <button id="trash" ng-click="deleteItem(article.kinderId)" class="button button-assertive">
                     <i class="icon ion-ios-trash"></i>
                 </button>
             </div>
-            
         </div>
-        <div class="list">
-  <label class="item item-input item-floating-label">
-   <span class="input-label">Name</span>
-    <input type="text" placeholder="Name">
-  </label>
-  <label class="item item-input item-floating-label">
-    <span class="input-label">CardNumber</span>
-    <input type="text" placeholder="CardNumber" >
-  </label>  
-  <label class="item item-input item-floating-label">
-    <span class="input-label">Card Expiration</span>
-    <input type="text" class="date" placeholder="MM" maxlength="2">
-  </label> 
-<label class="item item-input item-floating-label">
-    <span class="input-label">Card Expiration</span>
-    <input type="text" class="date" placeholder="YY" maxlength="2">
-  </label> 
-    <label class="item item-input item-floating-label">
-    <span class="input-label">CVV</span>
-    <input type="text" maxlength="3" placeholder="CVV" >
-  </label> 
- <div class="padding">
-    <button class="button button-block button-positive">Payment</div>
-  </div>  
-</div>
+
+        <div ng-if="numberOfItems > 0">
+            <form ng-submit="pay()" class="form-horizontal">
+                <div class="list list-inset">
+                    <div class="bar bar-header bar-positive">
+                        <h1 class="title"> Information de paiement</h1>
+                    </div>
+                    <div></div>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nom du titulaire</span>
+                        <input type="text" name="titulary" ng-model="paiement.titulary" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Numero de carte</span>
+                        <input type="text" name="number" ng-model="paiement.number" required>
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Mois</span>
+                        <input type="text" class="date" name="expiryMonth" id="expiryMonth" ng-model="paiement.expiryMonth">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Annee</span>
+                        <input type="text" class="date" name="expiryYear" ng-model="paiement.expiryYear">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Cryptogramme</span>
+                        <input type="text" maxlength="3" ng-model="paiement.cryptogram" name="cvv" id="cvv">
+                    </label>
+                    <button type="submit" class="button button-block button-positive"> Payer : {{priceOfItems}} euros</button>
+                </div>
+
+            </form>
+        </div>
+       
     </ion-content>
 </ion-view>

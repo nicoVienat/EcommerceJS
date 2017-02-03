@@ -6,6 +6,12 @@
     right: 12px;
 }
 
+.item-divider > .button-positive {
+    position: absolute;
+    top: 6px;
+    left: 12px;
+}
+
 .card .item:last-child, .list-inset .item:last-child {
     padding-top: 50px;
 }
@@ -23,4 +29,19 @@
     position: absolute;
     top: 35px;
     right: 15px;
+}
+
+.qtyItem {
+position: absolute;
+    right: 25px;
+    top: 25px;
+    font-size: 25px;
+}
+
+.bar.bar-positive {
+    position: relative;
+}
+
+.input-label {
+    font-weight:bold;
 }

@@ -23,42 +23,77 @@ angular.module('controllers', [])
 
     })
 
-    .controller('CartController', function ($scope, $rootScope, localStorage, $http) {
-       var cart = 'cart';
-       $scope.cart = localStorage.get(cart);
-       $scope.form = {};
-       $scope.form.titulary = "Nico";
-       $scope.form.number = 8522435151611278;
-       $scope.form.expiryMonth = "01";
-       $scope.form.expiryYear = "2013";
-       $scope.form.cryptogram = '946';
+    .controller('CartController', function ($scope, $rootScope, localStorage, $http, $ionicPopup) {
+        $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.cart = localStorage.get('cart');
+            $scope.numberOfItems = localStorage.getNumberOfItems();
+            $scope.priceOfItems = localStorage.getPriceTotal();
+            $scope.validOrder = -1;
+        }, function (err) {
+            console.log('Erreur : ' + err);
+        });
 
-       $scope.deleteItem = function (reference) {
-           localStorage.remove(reference);
-           $scope.cart = localStorage.get(cart);
-           $scope.numberOfItems = localStorage.getNumberOfItems();
-       };
+        $scope.doRefresh = function () {
+            $scope.cart = localStorage.get('cart');
+            $scope.numberOfItems = localStorage.getNumberOfItems();
+            $scope.priceOfItems = localStorage.getPriceTotal();
+            $scope.validOrder = -1;
+            $scope.$broadcast('scroll.refreshComplete');
+        };
 
-       $scope.refreshCart = function (reference, qty) {
-           localStorage.refresh(reference, qty);
-           $scope.numberOfItems = localStorage.getNumberOfItems();
-       };
+        var cart = 'cart';
+        $scope.cart = localStorage.get(cart);
+        $scope.validOrder = -1;
+        $scope.paiement = {};
+        $scope.paiement.titulary = "Nico";
+        $scope.paiement.number = 8522435151611278;
+        $scope.paiement.expiryMonth = "01";
+        $scope.paiement.expiryYear = "2013";
+        $scope.paiement.cryptogram = '946';
 
-       $scope.pay = function () {
-           console.log('tesst');
-           $http.post($rootScope.apiURL + '/paiement', $scope.form).then(function (res) {
-               $scope.validOrder = res.data.valid;
-               if (res.data.valid) {
-                   $('.alert-success').show();
-               }
-               else {
-                   $scope.checkoutErrorMessage = res.data.message;
-                   $('.alert-danger').show();
-               }
-           }, function (err) {
-               console.log('Erreur : ' + err);
-           });
-       };
+        $scope.numberOfItems = localStorage.getNumberOfItems();
+        $scope.priceOfItems = localStorage.getPriceTotal();
+        
+        $scope.deleteItem = function (reference) {
+            localStorage.remove(reference);
+            $scope.cart = localStorage.get(cart);
+            $scope.numberOfItems = localStorage.getNumberOfItems();
+            $scope.priceOfItems = localStorage.getPriceTotal();
+        };
+
+        $scope.refreshCart = function (reference, qty) {
+            localStorage.refresh(reference, qty);
+            $scope.numberOfItems = localStorage.getNumberOfItems();
+            $scope.priceOfItems = localStorage.getPriceTotal();
+        };
+
+        $scope.pay = function () {
+
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Confirmation commande',
+                template: 'Voulez-vous valider ce panier ?'
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    console.log($scope.paiement);
+                    $http.post($rootScope.apiURL + '/paiement', $scope.paiement).then(function (res) {
+                        if (res.data.valid) {
+                            localStorage.newCart();
+                            $scope.validOrder = 1;
+                        }
+                        else {
+                            $scope.validOrder = 0;
+                            $scope.checkoutErrorMessage = res.data.message;
+                        }
+                    }), function (err) {
+                        $scope.validOrder = 0;
+                        $scope.checkoutErrorMessage = err;
+                        console.log('Erreur : ' + err);
+                    }
+                }
+            });
+        }
    })
 
     .controller('ArticleController', function ($scope, $http, $stateParams, localStorage, $rootScope) {

@@ -10,6 +10,11 @@ angular.module('services', [])
         }
     };
 
+    this.newCart = function () {
+        var localstorage = [];
+        localStorage.setItem('cart', JSON.stringify(localstorage));
+    };
+
     this.get = function () {
         return JSON.parse(localStorage.getItem('cart'));
     };
@@ -17,10 +22,11 @@ angular.module('services', [])
     this.set = function (item) {
         var defer = $q.defer();
         var currentCart = this.get();
+       
         var added = false;
         if (currentCart != null) {
             for (var i = 0; i < currentCart.length; i++) {
-                if (currentCart[i].reference == item.reference) {
+                if (currentCart[i].kinderId == item.kinderId) {
                     currentCart[i].qty++;
                     added = true;
                 }
@@ -29,6 +35,7 @@ angular.module('services', [])
                 var itemToAdd = item;
                 itemToAdd.qty = 1;
                 currentCart.push(itemToAdd);
+                console.log(item);
             }
         }
         else {
@@ -38,7 +45,6 @@ angular.module('services', [])
             currentCart.push(itemToAdd);
         }
         localStorage.setItem('cart', JSON.stringify(currentCart));
-        console.log('--- set LocalStorage Done ---');
         defer.resolve();
         return defer.promise;
     };
@@ -52,6 +58,16 @@ angular.module('services', [])
         return numberOfItems;
     };
 
+    this.getPriceTotal = function () {
+        var items = JSON.parse(localStorage.getItem('cart'));
+        var priceTotal = 0;
+        items.forEach(function (item) {
+            priceTotal += (item.price * item.qty);
+        });
+        return priceTotal;
+    };
+
+
     this.remove = function (kinderId) {
         var defer = $q.defer();
         var currentCart = this.get();
@@ -64,7 +80,6 @@ angular.module('services', [])
                 }
             }
         }
-        console.log('--- Remove LocalStorage Done ---');
         defer.resolve();
         return defer.promise;
     };
@@ -81,7 +96,6 @@ angular.module('services', [])
                 }
             }
         }
-        console.log('--- Refresh LocalStorage Done ---');
         defer.resolve();
         return defer.promise;
     };
